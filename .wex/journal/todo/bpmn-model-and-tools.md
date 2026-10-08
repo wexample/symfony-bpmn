@@ -41,7 +41,7 @@ timers = « avant la date X », messages = notifications.
     le grant du couloir (memberships de symfony-user, todo
     `sapiens-group-memberships-and-scoping.md` section 5) ; passerelle exclusive →
     transitions conditionnées ; timer → garde de date (Scheduler) ; message →
-    notification (proposition symfony-notification) ;
+    notification (symfony-notification, construit le 2026-10-08) ;
   - une matrice rôle × action × état pour les voters ; les droits fins que BPMN
     n'exprime pas (modifier oui, supprimer non) vivent à côté (matrice, ou tables
     de décision type DMN si le besoin se confirme) ;
@@ -53,7 +53,7 @@ timers = « avant la date X », messages = notifications.
   parcours d'un chemin (« user story à tiroirs »), puis l'édition ; sur les
   composants et les JSON schemas du design system (todo
   `symfony-design-system/.wex/journal/todo/component-schemas.md`).
-- **symfony-bpmn-demo** : les cas d'exemple, réels compris.
+- **symfony-bpmn-demo** : les cas d'exemple, réels compris. Une démo à elle, sans utilisateurs propres : elle s'appuie sur les comptes et les équipes de symfony-user-demo (décision du 2026-10-08, comme notification-demo).
 
 ## Ordre
 
