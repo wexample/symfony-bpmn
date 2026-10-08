@@ -1,0 +1,7 @@
+domain: symfony-bpmn.wex
+global:
+  name: symfony-bpmn
+  type: php-package
+  version: 1.0.0
+wex:
+  version: 6.0.141
