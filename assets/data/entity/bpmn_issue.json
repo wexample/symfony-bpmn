@@ -1,0 +1,171 @@
+{
+    "name": "bpmn_issue",
+    "type": "class",
+    "description": "What the validator says of a process: an error that keeps it from running,\nor what is drawn and not run.\nRead from the `.bpmn` files of the registry, never stored: no `#[ORM\\Entity]`.\nIts id derives from what identifies it, so a list read twice holds the same\nentities.",
+    "properties": [
+        {
+            "name": "id",
+            "type": "Symfony\\Component\\Uid\\Uuid"
+        },
+        {
+            "name": "processId",
+            "type": "string"
+        },
+        {
+            "name": "position",
+            "type": "int"
+        },
+        {
+            "name": "severity",
+            "type": "string"
+        },
+        {
+            "name": "code",
+            "type": "string"
+        },
+        {
+            "name": "elementId",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "message",
+            "type": "string"
+        }
+    ],
+    "methods": [
+        {
+            "type": "method",
+            "name": "buildEntityPath",
+            "parameters": [
+                {
+                    "type": "string",
+                    "name": "className"
+                }
+            ],
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getEntityKeyName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getEntityShortName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getId",
+            "return": {
+                "type": "Symfony\\Component\\Uid\\Uuid"
+            }
+        },
+        {
+            "type": "method",
+            "name": "setId",
+            "parameters": [
+                {
+                    "type": "Symfony\\Component\\Uid\\Uuid",
+                    "name": "id"
+                }
+            ],
+            "return": {
+                "type": "void"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getTableizedName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getCamelName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "__construct",
+            "parameters": [
+                {
+                    "type": "string",
+                    "name": "processId"
+                },
+                {
+                    "type": "int",
+                    "name": "position"
+                },
+                {
+                    "type": "string",
+                    "name": "severity"
+                },
+                {
+                    "type": "string",
+                    "name": "code"
+                },
+                {
+                    "type": "string",
+                    "name": "elementId"
+                },
+                {
+                    "type": "string",
+                    "name": "message"
+                }
+            ]
+        },
+        {
+            "type": "method",
+            "name": "getProcessId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getPosition",
+            "return": {
+                "type": "int"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getSeverity",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getCode",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getElementId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getMessage",
+            "return": {
+                "type": "string"
+            }
+        }
+    ]
+}

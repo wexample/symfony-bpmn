@@ -1,4 +1,8 @@
 {
   "name": "@wexample/symfony-bpmn",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "peerDependencies": {
+    "@wexample/js-api": "*",
+    "@wexample/js-api-entity": "*"
+  }
 }

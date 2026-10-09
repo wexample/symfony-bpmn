@@ -1,0 +1,249 @@
+{
+    "name": "bpmn_lane",
+    "type": "class",
+    "description": "A lane of a process — who does what it holds —, where its band is drawn, and\nthe role or grant that acts in it.\nRead from the `.bpmn` files of the registry, never stored: no `#[ORM\\Entity]`.\nIts id derives from what identifies it, so a list read twice holds the same\nentities.",
+    "properties": [
+        {
+            "name": "id",
+            "type": "Symfony\\Component\\Uid\\Uuid"
+        },
+        {
+            "name": "processId",
+            "type": "string"
+        },
+        {
+            "name": "laneId",
+            "type": "string"
+        },
+        {
+            "name": "name",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "parentLaneId",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "depth",
+            "type": "int"
+        },
+        {
+            "name": "role",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "grant",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "x",
+            "type": "float"
+        },
+        {
+            "name": "y",
+            "type": "float"
+        },
+        {
+            "name": "width",
+            "type": "float"
+        },
+        {
+            "name": "height",
+            "type": "float"
+        }
+    ],
+    "methods": [
+        {
+            "type": "method",
+            "name": "buildEntityPath",
+            "parameters": [
+                {
+                    "type": "string",
+                    "name": "className"
+                }
+            ],
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getEntityKeyName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getEntityShortName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getId",
+            "return": {
+                "type": "Symfony\\Component\\Uid\\Uuid"
+            }
+        },
+        {
+            "type": "method",
+            "name": "setId",
+            "parameters": [
+                {
+                    "type": "Symfony\\Component\\Uid\\Uuid",
+                    "name": "id"
+                }
+            ],
+            "return": {
+                "type": "void"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getTableizedName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getCamelName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "__construct",
+            "parameters": [
+                {
+                    "type": "string",
+                    "name": "processId"
+                },
+                {
+                    "type": "string",
+                    "name": "laneId"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "parentLaneId"
+                },
+                {
+                    "type": "int",
+                    "name": "depth"
+                },
+                {
+                    "type": "string",
+                    "name": "role"
+                },
+                {
+                    "type": "string",
+                    "name": "grant"
+                },
+                {
+                    "type": "float",
+                    "name": "x"
+                },
+                {
+                    "type": "float",
+                    "name": "y"
+                },
+                {
+                    "type": "float",
+                    "name": "width"
+                },
+                {
+                    "type": "float",
+                    "name": "height"
+                }
+            ]
+        },
+        {
+            "type": "method",
+            "name": "getProcessId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getLaneId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getParentLaneId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getDepth",
+            "return": {
+                "type": "int"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getRole",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getGrant",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getX",
+            "return": {
+                "type": "float"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getY",
+            "return": {
+                "type": "float"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getWidth",
+            "return": {
+                "type": "float"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getHeight",
+            "return": {
+                "type": "float"
+            }
+        }
+    ]
+}

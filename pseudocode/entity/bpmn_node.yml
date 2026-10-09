@@ -1,0 +1,162 @@
+items:
+  - name: BpmnNode
+    type: class
+    description: "A node of a process — an event, a task, a gateway, an activity — and where\nit is drawn.\nRead from the `.bpmn` files of the registry, never stored: no `#[ORM\\Entity]`.\nIts id derives from what identifies it, so a list read twice holds the same\nentities."
+    properties:
+      - name: id
+        type: Symfony\Component\Uid\Uuid
+      - name: processId
+        type: string
+      - name: nodeId
+        type: string
+      - name: name
+        type: string
+        nullable: true
+      - name: documentation
+        type: string
+        nullable: true
+      - name: element
+        type: string
+      - name: kind
+        type: string
+      - name: variant
+        type: string
+        nullable: true
+      - name: definitions
+        type: array
+      - name: attachedTo
+        type: string
+        nullable: true
+      - name: laneId
+        type: string
+        nullable: true
+      - name: x
+        type: float
+      - name: 'y'
+        type: float
+      - name: width
+        type: float
+      - name: height
+        type: float
+    methods:
+      - type: method
+        name: buildEntityPath
+        parameters:
+          - type: string
+            name: className
+        return:
+          type: string
+      - type: method
+        name: getEntityKeyName
+        return:
+          type: string
+      - type: method
+        name: getEntityShortName
+        return:
+          type: string
+      - type: method
+        name: getId
+        return:
+          type: Symfony\Component\Uid\Uuid
+      - type: method
+        name: setId
+        parameters:
+          - type: Symfony\Component\Uid\Uuid
+            name: id
+        return:
+          type: void
+      - type: method
+        name: getTableizedName
+        return:
+          type: string
+      - type: method
+        name: getCamelName
+        return:
+          type: string
+      - type: method
+        name: __construct
+        parameters:
+          - type: string
+            name: processId
+          - type: string
+            name: nodeId
+          - type: string
+            name: name
+          - type: string
+            name: documentation
+          - type: string
+            name: element
+          - type: string
+            name: kind
+          - type: string
+            name: variant
+          - type: array
+            name: definitions
+          - type: string
+            name: attachedTo
+          - type: string
+            name: laneId
+          - type: float
+            name: x
+          - type: float
+            name: 'y'
+          - type: float
+            name: width
+          - type: float
+            name: height
+      - type: method
+        name: getProcessId
+        return:
+          type: string
+      - type: method
+        name: getNodeId
+        return:
+          type: string
+      - type: method
+        name: getName
+        return:
+          type: string
+      - type: method
+        name: getDocumentation
+        return:
+          type: string
+      - type: method
+        name: getElement
+        return:
+          type: string
+      - type: method
+        name: getKind
+        return:
+          type: string
+      - type: method
+        name: getVariant
+        return:
+          type: string
+      - type: method
+        name: getDefinitions
+        return:
+          type: array
+      - type: method
+        name: getAttachedTo
+        return:
+          type: string
+      - type: method
+        name: getLaneId
+        return:
+          type: string
+      - type: method
+        name: getX
+        return:
+          type: float
+      - type: method
+        name: getY
+        return:
+          type: float
+      - type: method
+        name: getWidth
+        return:
+          type: float
+      - type: method
+        name: getHeight
+        return:
+          type: float

@@ -1,0 +1,235 @@
+{
+    "name": "bpmn_task_right",
+    "type": "class",
+    "description": "Who may do a task of a process: its lane, and the role or the grant on the\nsubject's group that acts in it — a row of the rights matrix.\nRead from the `.bpmn` files of the registry, never stored: no `#[ORM\\Entity]`.\nIts id derives from what identifies it, so a list read twice holds the same\nentities.",
+    "properties": [
+        {
+            "name": "id",
+            "type": "Symfony\\Component\\Uid\\Uuid"
+        },
+        {
+            "name": "processId",
+            "type": "string"
+        },
+        {
+            "name": "taskId",
+            "type": "string"
+        },
+        {
+            "name": "name",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "element",
+            "type": "string"
+        },
+        {
+            "name": "laneId",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "laneName",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "role",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "grant",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "automatic",
+            "type": "bool"
+        },
+        {
+            "name": "interruptedBy",
+            "type": "array"
+        }
+    ],
+    "methods": [
+        {
+            "type": "method",
+            "name": "buildEntityPath",
+            "parameters": [
+                {
+                    "type": "string",
+                    "name": "className"
+                }
+            ],
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getEntityKeyName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getEntityShortName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getId",
+            "return": {
+                "type": "Symfony\\Component\\Uid\\Uuid"
+            }
+        },
+        {
+            "type": "method",
+            "name": "setId",
+            "parameters": [
+                {
+                    "type": "Symfony\\Component\\Uid\\Uuid",
+                    "name": "id"
+                }
+            ],
+            "return": {
+                "type": "void"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getTableizedName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getCamelName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "__construct",
+            "parameters": [
+                {
+                    "type": "string",
+                    "name": "processId"
+                },
+                {
+                    "type": "string",
+                    "name": "taskId"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "element"
+                },
+                {
+                    "type": "string",
+                    "name": "laneId"
+                },
+                {
+                    "type": "string",
+                    "name": "laneName"
+                },
+                {
+                    "type": "string",
+                    "name": "role"
+                },
+                {
+                    "type": "string",
+                    "name": "grant"
+                },
+                {
+                    "type": "bool",
+                    "name": "automatic"
+                },
+                {
+                    "type": "array",
+                    "name": "interruptedBy"
+                }
+            ]
+        },
+        {
+            "type": "method",
+            "name": "getProcessId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getTaskId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getElement",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getLaneId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getLaneName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getRole",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getGrant",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getAutomatic",
+            "return": {
+                "type": "bool"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getInterruptedBy",
+            "return": {
+                "type": "array"
+            }
+        }
+    ]
+}

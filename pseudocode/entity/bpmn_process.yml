@@ -1,0 +1,127 @@
+items:
+  - name: BpmnProcess
+    type: class
+    description: "A process the application holds, as a list shows it: what it is called, how\nlarge it is, whether it holds together.\nRead from the `.bpmn` files of the registry, never stored: no `#[ORM\\Entity]`.\nIts id derives from what identifies it, so a list read twice holds the same\nentities."
+    properties:
+      - name: id
+        type: Symfony\Component\Uid\Uuid
+      - name: processId
+        type: string
+      - name: name
+        type: string
+        nullable: true
+      - name: documentation
+        type: string
+        nullable: true
+      - name: executable
+        type: bool
+      - name: laneCount
+        type: int
+      - name: nodeCount
+        type: int
+      - name: flowCount
+        type: int
+      - name: valid
+        type: bool
+      - name: errorCount
+        type: int
+      - name: warningCount
+        type: int
+    methods:
+      - type: method
+        name: buildEntityPath
+        parameters:
+          - type: string
+            name: className
+        return:
+          type: string
+      - type: method
+        name: getEntityKeyName
+        return:
+          type: string
+      - type: method
+        name: getEntityShortName
+        return:
+          type: string
+      - type: method
+        name: getId
+        return:
+          type: Symfony\Component\Uid\Uuid
+      - type: method
+        name: setId
+        parameters:
+          - type: Symfony\Component\Uid\Uuid
+            name: id
+        return:
+          type: void
+      - type: method
+        name: getTableizedName
+        return:
+          type: string
+      - type: method
+        name: getCamelName
+        return:
+          type: string
+      - type: method
+        name: __construct
+        parameters:
+          - type: string
+            name: processId
+          - type: string
+            name: name
+          - type: string
+            name: documentation
+          - type: bool
+            name: executable
+          - type: int
+            name: laneCount
+          - type: int
+            name: nodeCount
+          - type: int
+            name: flowCount
+          - type: bool
+            name: valid
+          - type: int
+            name: errorCount
+          - type: int
+            name: warningCount
+      - type: method
+        name: getProcessId
+        return:
+          type: string
+      - type: method
+        name: getName
+        return:
+          type: string
+      - type: method
+        name: getDocumentation
+        return:
+          type: string
+      - type: method
+        name: getExecutable
+        return:
+          type: bool
+      - type: method
+        name: getLaneCount
+        return:
+          type: int
+      - type: method
+        name: getNodeCount
+        return:
+          type: int
+      - type: method
+        name: getFlowCount
+        return:
+          type: int
+      - type: method
+        name: getValid
+        return:
+          type: bool
+      - type: method
+        name: getErrorCount
+        return:
+          type: int
+      - type: method
+        name: getWarningCount
+        return:
+          type: int

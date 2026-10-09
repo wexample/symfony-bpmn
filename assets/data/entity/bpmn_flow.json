@@ -1,0 +1,202 @@
+{
+    "name": "bpmn_flow",
+    "type": "class",
+    "description": "A sequence flow of a process: from where to where, under what condition, and\nthe points its line is drawn through.\nRead from the `.bpmn` files of the registry, never stored: no `#[ORM\\Entity]`.\nIts id derives from what identifies it, so a list read twice holds the same\nentities.",
+    "properties": [
+        {
+            "name": "id",
+            "type": "Symfony\\Component\\Uid\\Uuid"
+        },
+        {
+            "name": "processId",
+            "type": "string"
+        },
+        {
+            "name": "flowId",
+            "type": "string"
+        },
+        {
+            "name": "sourceId",
+            "type": "string"
+        },
+        {
+            "name": "targetId",
+            "type": "string"
+        },
+        {
+            "name": "name",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "condition",
+            "type": "string",
+            "nullable": true
+        },
+        {
+            "name": "isDefault",
+            "type": "bool"
+        },
+        {
+            "name": "points",
+            "type": "array"
+        }
+    ],
+    "methods": [
+        {
+            "type": "method",
+            "name": "buildEntityPath",
+            "parameters": [
+                {
+                    "type": "string",
+                    "name": "className"
+                }
+            ],
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getEntityKeyName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getEntityShortName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getId",
+            "return": {
+                "type": "Symfony\\Component\\Uid\\Uuid"
+            }
+        },
+        {
+            "type": "method",
+            "name": "setId",
+            "parameters": [
+                {
+                    "type": "Symfony\\Component\\Uid\\Uuid",
+                    "name": "id"
+                }
+            ],
+            "return": {
+                "type": "void"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getTableizedName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getCamelName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "__construct",
+            "parameters": [
+                {
+                    "type": "string",
+                    "name": "processId"
+                },
+                {
+                    "type": "string",
+                    "name": "flowId"
+                },
+                {
+                    "type": "string",
+                    "name": "sourceId"
+                },
+                {
+                    "type": "string",
+                    "name": "targetId"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "condition"
+                },
+                {
+                    "type": "bool",
+                    "name": "isDefault"
+                },
+                {
+                    "type": "array",
+                    "name": "points"
+                }
+            ]
+        },
+        {
+            "type": "method",
+            "name": "getProcessId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getFlowId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getSourceId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getTargetId",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getName",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getCondition",
+            "return": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "method",
+            "name": "isDefault",
+            "return": {
+                "type": "bool"
+            }
+        },
+        {
+            "type": "method",
+            "name": "getPoints",
+            "return": {
+                "type": "array"
+            }
+        }
+    ]
+}
