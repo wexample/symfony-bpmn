@@ -14,7 +14,7 @@ class CompilerTest extends AbstractBpmnTestCase
 
     public function testTheExamplesAreFoundAndSound(): void
     {
-        $this->assertSame(['article_review', 'engagement_letter', 'maintenance_request', 'tenant_move_in', 'visit_booking'], array_keys($this->registry()->all()));
+        $this->assertSame(['article_review', 'engagement_letter', 'maintenance_request', 'public_expenditure', 'tenant_move_in', 'visit_booking'], array_keys($this->registry()->all()));
 
         foreach (array_keys($this->registry()->all()) as $id) {
             $this->assertTrue($this->registry()->validate($id)->isValid(), $id);
