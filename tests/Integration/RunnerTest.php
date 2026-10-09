@@ -123,6 +123,55 @@ class RunnerTest extends AbstractBpmnTestCase
         $this->assertSame('article_published', $this->messages[0]->messageRef);
     }
 
+    public function testAVisitIsRemindedTheDayAndTheHourBefore(): void
+    {
+        $visit = $this->folder();
+        $runner = $this->runner();
+
+        $this->signIn('ROLE_PROSPECT');
+        $runner->start($visit, 'visit_booking');
+        $this->signIn('ROLE_AGENT');
+        $runner->complete($visit, 'qualify');
+
+        // Slots offered: an answer, or two days of silence.
+        $this->assertSame(['answer'], $runner->getWaitingNodes($visit));
+        $this->assertSame(['no_answer'], $this->timers()->getTransitions());
+
+        $runner->receive($visit, 'slot_chosen', ['visit_at' => '2026-10-20T10:00:00+00:00']);
+        $this->assertSame(['day_before'], $runner->getWaitingNodes($visit));
+        // A date given as ISO 8601 text, then as a DateTime: both scheduled.
+        $this->assertSame('2026-10-19T10:00:00+00:00', end($this->timers()->scheduled)[1]->format(DATE_ATOM));
+
+        $runner->fireTimer($visit, 'day_before');
+        $this->assertSame(['hour_before'], $runner->getWaitingNodes($visit));
+        $this->assertSame('2026-10-20T09:00:00+00:00', end($this->timers()->scheduled)[1]->format(DATE_ATOM));
+
+        $runner->fireTimer($visit, 'hour_before');
+        $this->assertSame(['visit'], $runner->getWaitingNodes($visit));
+        $this->assertSame(['offer_slots', 'remind_day_before', 'remind_hour_before'], $this->messageNodes());
+
+        $runner->complete($visit, 'visit');
+        $this->assertSame(['visited'], $runner->getWaitingNodes($visit));
+    }
+
+    public function testASilentProspectIsRelaunchedOnceThenGivenUp(): void
+    {
+        $visit = $this->folder();
+        $runner = $this->runner();
+
+        $this->signIn('ROLE_PROSPECT');
+        $runner->start($visit, 'visit_booking');
+        $this->signIn('ROLE_AGENT');
+        $runner->complete($visit, 'qualify');
+
+        $runner->fireTimer($visit, 'no_answer');
+        $this->assertSame(['answer'], $runner->getWaitingNodes($visit));
+        $this->assertTrue($visit->getBpmnVariables()['relaunched']);
+
+        $runner->fireTimer($visit, 'no_answer');
+        $this->assertSame(['given_up'], $runner->getWaitingNodes($visit));
+    }
+
     public function testAStartedSubjectIsNotStartedAgain(): void
     {
         $letter = $this->folder();

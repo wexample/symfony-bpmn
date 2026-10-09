@@ -29,7 +29,7 @@ class BpmnTimerMessageHandler
             return;
         }
 
-        if ($this->runner->fireTimer($subject, $message->transition)) {
+        if ($this->runner->fireTimer($subject, $message->timer)) {
             $this->entityManager->flush();
         }
     }

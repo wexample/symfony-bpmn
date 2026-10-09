@@ -22,12 +22,12 @@ class MessengerTimerScheduler implements BpmnTimerSchedulerInterface
     ) {
     }
 
-    public function schedule(BpmnSubjectInterface $subject, string $processId, string $transition, DateTimeImmutable $fireAt): void
+    public function schedule(BpmnSubjectInterface $subject, string $processId, string $timer, DateTimeImmutable $fireAt): void
     {
         $delay = max(0, ($fireAt->getTimestamp() - time()) * 1000);
 
         $this->bus->dispatch(
-            new BpmnTimerMessage($subject instanceof Proxy ? get_parent_class($subject) : $subject::class, (string) $subject->getId(), $processId, $transition),
+            new BpmnTimerMessage($subject instanceof Proxy ? get_parent_class($subject) : $subject::class, (string) $subject->getId(), $processId, $timer),
             [new DelayStamp($delay)]
         );
     }

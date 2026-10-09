@@ -14,9 +14,9 @@ class RecordingTimerScheduler implements BpmnTimerSchedulerInterface
     /** @var list<array{string, DateTimeImmutable}> */
     public array $scheduled = [];
 
-    public function schedule(BpmnSubjectInterface $subject, string $processId, string $transition, DateTimeImmutable $fireAt): void
+    public function schedule(BpmnSubjectInterface $subject, string $processId, string $timer, DateTimeImmutable $fireAt): void
     {
-        $this->scheduled[] = [$transition, $fireAt];
+        $this->scheduled[] = [$timer, $fireAt];
     }
 
     /**

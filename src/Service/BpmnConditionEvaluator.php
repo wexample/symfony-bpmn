@@ -46,6 +46,14 @@ class BpmnConditionEvaluator
 
     public function evaluate(BpmnSubjectInterface $subject, string $condition): bool
     {
+        return (bool) $this->evaluateValue($subject, $condition);
+    }
+
+    /**
+     * What an expression gives: a condition's truth, a timer's date.
+     */
+    public function evaluateValue(BpmnSubjectInterface $subject, string $condition): mixed
+    {
         $expression = trim($condition);
 
         if (preg_match('/^\$\{(.*)\}$/s', $expression, $match)) {
@@ -53,7 +61,7 @@ class BpmnConditionEvaluator
         }
 
         try {
-            return (bool) $this->expressionLanguage->evaluate($expression, [
+            return $this->expressionLanguage->evaluate($expression, [
                 'variables' => new BpmnVariables($subject->getBpmnVariables()),
                 'subject' => $subject,
             ]);

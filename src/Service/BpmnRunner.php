@@ -3,6 +3,7 @@
 namespace Wexample\SymfonyBpmn\Service;
 
 use DateTimeImmutable;
+use DateTimeInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\Workflow\Workflow;
@@ -10,6 +11,7 @@ use Wexample\PhpBpmn\Class\Element\Event;
 use Wexample\PhpBpmn\Class\Element\Task;
 use Wexample\PhpBpmn\Enum\EventDefinitionType;
 use Wexample\PhpBpmn\Enum\TaskType;
+use Wexample\PhpBpmn\Enum\TimerKind;
 use Wexample\PhpBpmn\Helper\Iso8601Helper;
 use Wexample\SymfonyBpmn\Class\CompiledProcess;
 use Wexample\SymfonyBpmn\Class\CompiledTransition;
@@ -48,6 +50,7 @@ class BpmnRunner
         private readonly BpmnTimerSchedulerInterface $timers,
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly LaneAccessService $laneAccess,
+        private readonly BpmnConditionEvaluator $conditions,
         #[AutowireIterator(BpmnTaskHandlerInterface::TAG)]
         private readonly iterable $handlers = [],
     ) {
@@ -129,24 +132,30 @@ class BpmnRunner
     }
 
     /**
-     * Fires a timer the subject still waits for: what the scheduled message
-     * does, when it comes.
+     * Fires a timer the subject still waits for — by its event, or one of
+     * its transitions —: what the scheduled message does when it comes.
+     * Where the timer leads to a choice, the conditions decide its way.
      *
      * @return bool whether it still waited
      */
-    public function fireTimer(BpmnSubjectInterface $subject, string $transitionName): bool
+    public function fireTimer(BpmnSubjectInterface $subject, string $timer): bool
     {
         $compiled = $this->getCompiled($subject);
-        $transition = $compiled->getTransition($transitionName);
+        $named = $compiled->getTransition($timer);
+        $candidates = array_values(array_filter(
+            $named ? [$named] : $compiled->getTransitionsOf($timer),
+            static fn (CompiledTransition $transition) => $transition->isTimed()
+        ));
 
-        if ($transition === null || ! $transition->isTimed()) {
+        if (! $candidates) {
             return false;
         }
 
-        return $this->actor->asSystem(function () use ($subject, $compiled, $transition) {
+        return $this->actor->asSystem(function () use ($subject, $compiled, $candidates) {
             $workflow = $this->workflows->get($compiled->process->getId());
+            $transition = $this->firstEnabled($subject, $workflow, $candidates);
 
-            if (! $workflow->can($subject, $transition->name)) {
+            if ($transition === null) {
                 return false;
             }
 
@@ -304,19 +313,44 @@ class BpmnRunner
             $this->tell($subject, $compiled, $throwId, $definition?->getRef());
         }
 
-        // The timers of where it waits now.
+        // The timers of where it waits now: one per timer event, whichever
+        // way it then goes.
         $now = new DateTimeImmutable();
+        $scheduled = [];
 
         foreach (array_diff(array_keys($subject->getBpmnMarking()), $before) as $place) {
             foreach ($compiled->getTransitionsFrom($place) as $next) {
-                if ($next->isTimed() && $next->timerKind !== null
-                    && ($fireAt = Iso8601Helper::getFireDate($next->timerKind, (string) $next->timer, $now)) !== null) {
-                    $this->timers->schedule($subject, $processId, $next->name, $fireAt);
+                if ($next->isTimed() && ! isset($scheduled[$next->node]) && ($fireAt = $this->getFireDate($subject, $next, $now)) !== null) {
+                    $scheduled[$next->node] = true;
+                    $this->timers->schedule($subject, $processId, $next->node, $fireAt);
                 }
             }
         }
 
         $this->eventDispatcher->dispatch(new BpmnTransitionEvent($subject, $processId, $transition, $this->actor->isSystem()));
+    }
+
+    /**
+     * When a timer fires: its ISO 8601, or its expression evaluated —
+     * `${variables['visit_at']}` giving a date, or ISO 8601 text. Null where
+     * it gives nothing: the timer is not scheduled.
+     */
+    private function getFireDate(BpmnSubjectInterface $subject, CompiledTransition $transition, DateTimeImmutable $now): ?DateTimeImmutable
+    {
+        $expression = (string) $transition->timer;
+        $kind = $transition->timerKind ?? TimerKind::DURATION;
+
+        if (! Iso8601Helper::isExpression($expression)) {
+            return Iso8601Helper::getFireDate($kind, $expression, $now);
+        }
+
+        $value = $this->conditions->evaluateValue($subject, $expression);
+
+        if ($value instanceof DateTimeInterface) {
+            return DateTimeImmutable::createFromInterface($value);
+        }
+
+        return is_string($value) && $value !== '' ? Iso8601Helper::getFireDate($kind, $value, $now) : null;
     }
 
     private function tell(BpmnSubjectInterface $subject, CompiledProcess $compiled, string $nodeId, ?string $messageRef): void
