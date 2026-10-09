@@ -59,7 +59,7 @@ Neither is required; each is followed when installed:
 ## Rights, paths, scenarios
 
 - `BpmnMatrixService::build($processId)`: each task, its lane, the role or grant, whether the application does it, what interrupts it.
-- `BpmnScenarioService::getPaths($processId, $maxVisits)`: every complete way through the process; `play($subject, $path, $actAs, $variables)` plays one, each step done by `$actAs($lane)` signed in, with the variables given for its node — each timer fired, each message received: a multi-actor test drawn as the process.
+- `BpmnScenarioService::getCoveringPaths($processId)`: a few complete paths taking every flow together, each loop gone round once — php-bpmn's `PathFinder::cover()`, what the paths tab shows —; `getPaths($processId, $maxVisits)`: every combination; `play($subject, $path, $actAs, $variables)` plays one, each step done by `$actAs($lane)` signed in, with the variables given for its node — each timer fired, each message received: a multi-actor test drawn as the process.
 
 ## Testing the application against a process
 
@@ -71,6 +71,6 @@ Neither is required; each is followed when installed:
 |---|---|
 | `bpmn:list` | the processes, their file, whether they are sound |
 | `bpmn:validate [process]` | the issues of the validator, then the compilation |
-| `bpmn:paths <process> [--visits=1]` | every path, step by step and lane by lane |
+| `bpmn:paths <process> [--all] [--visits=1]` | the covering paths — or every combination —, step by step and lane by lane |
 | `bpmn:matrix <process>` | who does each task |
 | `bpmn:dump <process>` | the compiled workflow as a Mermaid graph |

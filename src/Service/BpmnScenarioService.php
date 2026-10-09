@@ -31,6 +31,19 @@ class BpmnScenarioService
     }
 
     /**
+     * A few complete paths taking, together, every flow of the process,
+     * each loop gone round once: what to show, and what to play.
+     *
+     * @return list<Path>
+     */
+    public function getCoveringPaths(string $processId): array
+    {
+        return (new PathFinder())->cover($this->registry->get($processId));
+    }
+
+    /**
+     * Every combination, a loop gone round `$maxVisits` times at most.
+     *
      * @return list<Path>
      */
     public function getPaths(string $processId, int $maxVisits = 1, bool $completeOnly = true): array

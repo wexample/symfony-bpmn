@@ -182,13 +182,14 @@ class BpmnViewService
     }
 
     /**
-     * The ways through the process, start to end, a loop walked once.
+     * The ways through the process, start to end: few, taking every flow
+     * together, each loop gone round once.
      *
      * @return list<BpmnPath>
      */
     public function paths(string $processId): array
     {
-        $paths = $this->scenarios->getPaths($processId);
+        $paths = $this->scenarios->getCoveringPaths($processId);
 
         return array_map(
             static fn (Path $path, int $position) => new BpmnPath(

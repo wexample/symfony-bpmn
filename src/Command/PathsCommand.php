@@ -11,14 +11,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wexample\PhpBpmn\Class\Path\PathFinder;
 
-#[AsCommand(name: 'bpmn:paths', description: 'Tells every path through a process, step by step and lane by lane: the scenarios to test.')]
+#[AsCommand(name: 'bpmn:paths', description: 'Tells the paths through a process, step by step and lane by lane: the scenarios to test. A few covering every flow, or every combination with --all.')]
 class PathsCommand extends AbstractBpmnCommand
 {
     protected function configure(): void
     {
         $this
             ->addArgument('process', InputArgument::REQUIRED)
-            ->addOption('visits', null, InputOption::VALUE_REQUIRED, 'How many times a loop is gone round.', '1');
+            ->addOption('all', null, InputOption::VALUE_NONE, 'Every combination of choices, rather than a few paths taking every flow.')
+            ->addOption('visits', null, InputOption::VALUE_REQUIRED, 'With --all, how many times a loop is gone round.', '1');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -26,7 +27,11 @@ class PathsCommand extends AbstractBpmnCommand
         $io = new SymfonyStyle($input, $output);
         $process = $this->registry->get($input->getArgument('process'));
 
-        foreach ((new PathFinder((int) $input->getOption('visits')))->find($process) as $index => $path) {
+        $paths = $input->getOption('all')
+            ? (new PathFinder((int) $input->getOption('visits')))->find($process)
+            : (new PathFinder())->cover($process);
+
+        foreach ($paths as $index => $path) {
             $io->section(sprintf('#%d %s%s', $index + 1, $path->describe(), $path->isComplete() ? '' : ' (cut)'));
 
             foreach ($path->getSteps() as $step) {
