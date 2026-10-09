@@ -92,7 +92,7 @@ Non fait, volontairement :
 - boundary non interrompants, inclusive / complex, erreurs, compensation : dessinés, non exécutés (le validateur le dit) ;
 - les huit workflows de gestion locative ne sont pas tous convertis : trois en exemples (WF-002, 004, 007), les autres suivront le même chemin si utile.
 
-Reste pour la partie visible (avec le propriétaire) : **symfony-bpmn-ds** (affichage du diagramme — mise en page automatique quand le fichier n'a pas de BPMNDI —, parcours d'un chemin, puis édition) et **symfony-bpmn-demo** (les exemples, sur les comptes et équipes de user-demo ; la relecture d'article branchée sur les grants des équipes).
+Reste pour la partie visible, confiée à l'agent design system (todo `symfony-bpmn-ds/.wex/journal/todo/bpmn-interface-and-demo.md`) : **symfony-bpmn-ds** (affichage du diagramme — mise en page automatique quand le fichier n'a pas de BPMNDI —, parcours d'un chemin, puis édition) et **symfony-bpmn-demo** (les exemples, sur les comptes et équipes de user-demo ; la relecture d'article branchée sur les grants des équipes).
 
 ## Ordre
 
