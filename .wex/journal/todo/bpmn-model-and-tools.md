@@ -1,7 +1,7 @@
 # BPMN : le modèle des règles métier, dessiné, exécuté en partie, testé
 
 Opened: 2026-10-08
-Updated: 2026-10-08
+Updated: 2026-10-09
 Author: agent:main
 
 Une seule todo pour quatre packages : `php-bpmn`, `symfony-bpmn`,
@@ -54,6 +54,28 @@ timers = « avant la date X », messages = notifications.
   composants et les JSON schemas du design system (todo
   `symfony-design-system/.wex/journal/todo/component-schemas.md`).
 - **symfony-bpmn-demo** : les cas d'exemple, réels compris. Une démo à elle, sans utilisateurs propres : elle s'appuie sur les comptes et les équipes de symfony-user-demo (décision du 2026-10-08, comme notification-demo).
+
+
+## Cas réels retenus (2026-10-09, avec le propriétaire)
+
+- **Gestion locative** (MOJOE we-invest, `test-1/workflows/` : 8 workflows current/target en YAML, `graphs/` en Mermaid avec les décisions) : entrée du locataire (bail signé, acompte, garantie, état des lieux), demande d'intervention avec devis > 200 € soumis au propriétaire, rappels J-1 / H-1 d'une visite. Anonymisé : une agence de location générique.
+- **Lettre de mission** (MOJOE engagement-letters, `.wex/local/sources/roadmap/2026-04-16-export/`) : composition, validation, signatures dans l'ordre manager → associé → client, archivage, renouvellement à 1 ou 3 ans selon le risque, relance. Anonymisé : un cabinet de conseil générique, sans nom de client ni d'outil.
+- **Relecture d'article** (inventé, sur les équipes de symfony-user-demo) : un contributeur soumet, un administrateur valide ou renvoie, l'observateur est prévenu, relance après deux jours.
+
+Le propriétaire laisse la main pour le backend (php-bpmn, symfony-bpmn) et revient pour la partie visible (-ds, -demo).
+
+## Conception retenue (2026-10-09)
+
+**php-bpmn**
+- Modèle : `Definitions` (processus, collaborations, messages, signaux, erreurs, diagramme), `Process` (nœuds, flux, couloirs), tâches typées (user, manual, service, send, receive, script, business rule), sous-processus, call activity, événements (début, fin, intermédiaires, frontière) et leurs définitions (message, timer, signal, error, conditional, terminate…), passerelles (exclusive, parallel, inclusive, event-based), flux conditionnels et par défaut, couloirs imbriqués.
+- Lecture et écriture du XML BPMN 2.0, le diagramme (BPMNDI) conservé d'un aller-retour ; des propriétés à nous dans `extensionElements` (`wex:property`) : rôle ou accès d'un couloir, catégorie de notification d'un message.
+- Un builder PHP, un validateur (structure, puis sous-ensemble exécutable), l'énumération des chemins d'un processus (scénarios).
+
+**symfony-bpmn**
+- Un registre des `.bpmn` de l'application ; chaque processus traduit en `Symfony\Component\Workflow` (type workflow, réseau de Petri) : places = états d'attente (activités, événements intermédiaires, passerelle event-based, fins), transitions = achèvement d'une activité vers les attentes suivantes à travers les passerelles ; conditions en ExpressionLanguage ; la jointure parallèle par places d'arrivée.
+- Gardes : couloir → rôle, ou accès de membership (symfony-user) sur le groupe du sujet.
+- Runner : démarrer, achever une tâche, appliquer les transitions automatiques (tâches de service via des handlers, envois, jointures), programmer les timers (Messenger avec délai), émettre les messages (symfony-notification s'il est installé), tracer (symfony-activity s'il est installé).
+- Matrice des droits (couloir × tâche), scénarios tirés des chemins, commandes (lister, valider, chemins, matrice, dump Mermaid du workflow).
 
 ## Ordre
 
