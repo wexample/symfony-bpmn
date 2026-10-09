@@ -61,6 +61,10 @@ Neither is required; each is followed when installed:
 - `BpmnMatrixService::build($processId)`: each task, its lane, the role or grant, whether the application does it, what interrupts it.
 - `BpmnScenarioService::getPaths($processId, $maxVisits)`: every complete way through the process; `play($subject, $path, $actAs, $variables)` plays one, each step done by `$actAs($lane)` signed in, with the variables given for its node — each timer fired, each message received: a multi-actor test drawn as the process.
 
+## Testing the application against a process
+
+`BpmnScenarioService` tests a process run by this bundle. To test **an application** against a process — each person, at each task, gets the pages they should and only those —, use wexample/symfony-testing's scenarios: a `.bpmn` and a fixtures file side by side, played by HTTP lane by lane, with or without this bundle installed. See symfony-testing's scenarios page.
+
 ## Commands
 
 | Command | |
