@@ -21,6 +21,7 @@ class WexampleSymfonyBpmnExtension extends AbstractWexampleSymfonyExtension
 
         $container->setParameter('wexample_symfony_bpmn.paths', $config['paths']);
         $container->setParameter('wexample_symfony_bpmn.lanes', $config['lanes']);
+        $container->setParameter('wexample_symfony_bpmn.view_role', $config['view_role']);
 
         $container
             ->registerForAutoconfiguration(BpmnTaskHandlerInterface::class)

@@ -12,5 +12,16 @@ services:
             - '../../EventSubscriber/BpmnActivitySubscriber.php'
             - '../../EventSubscriber/BpmnNotificationSubscriber.php'
 
+    # The lists of a process as entity lists (symfony-api): each entity its
+    # normalizer, each its endpoint.
+    Wexample\SymfonyBpmn\Api\Normalizer\:
+        resource: '../../Api/Normalizer/*'
+        tags: ['serializer.normalizer']
+
+    Wexample\SymfonyBpmn\Api\Controller\:
+        resource: '../../Api/Controller/*'
+        exclude: '../../Api/Controller/Abstract*.php'
+        tags: ['controller.service_arguments']
+
     Wexample\SymfonyBpmn\Interface\BpmnTimerSchedulerInterface:
         alias: Wexample\SymfonyBpmn\Service\MessengerTimerScheduler

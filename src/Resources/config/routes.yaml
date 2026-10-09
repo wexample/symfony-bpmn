@@ -1,0 +1,4 @@
+# The lists of a process, each the `list` of its entity.
+bpmn_api_controllers:
+    resource: '../../Api/Controller/'
+    type: attribute

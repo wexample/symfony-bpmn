@@ -48,5 +48,7 @@ services:
     alias: Wexample\SymfonyBpmn\Service\BpmnScenarioService
   test.matrix:
     alias: Wexample\SymfonyBpmn\Service\BpmnMatrixService
+  test.view:
+    alias: Wexample\SymfonyBpmn\Service\BpmnViewService
   test.token_storage:
     alias: security.token_storage

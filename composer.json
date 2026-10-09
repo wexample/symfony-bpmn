@@ -32,7 +32,10 @@
     "symfony/http-kernel": "^7.4 || ^8.0",
     "symfony/messenger": "^7.4 || ^8.0",
     "symfony/security-core": "^7.4 || ^8.0",
-    "symfony/workflow": "^7.4 || ^8.0"
+    "symfony/workflow": "^7.4 || ^8.0",
+    "wexample/symfony-api": ">=12.0.0",
+    "wexample/php-pseudocode": ">=2.2.0",
+    "wexample/symfony-pseudocode": ">=3.0.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^13",
