@@ -1,0 +1,52 @@
+framework:
+  messenger: ~
+
+doctrine:
+  orm:
+    mappings:
+      FixtureApp:
+        type: attribute
+        dir: '%kernel.project_dir%/Entity'
+        prefix: 'Wexample\SymfonyBpmn\Tests\Fixtures\App\Entity'
+        is_bundle: false
+
+security:
+  providers:
+    memory:
+      memory:
+        users: []
+  firewalls:
+    main:
+      lazy: true
+      provider: memory
+
+# The examples of php-bpmn: a rental agency, an advisory firm, a team.
+wexample_symfony_bpmn:
+  paths: ['%kernel.project_dir%/../../../vendor/wexample/php-bpmn/examples']
+  lanes:
+    maintenance_request:
+      # Over what the lane says: ROLE_OWNER, not ROLE_LANDLORD.
+      landlord: { role: ROLE_OWNER }
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  Wexample\SymfonyBpmn\Tests\Fixtures\App\Handler\:
+    resource: '../Handler/'
+
+  Wexample\SymfonyBpmn\Interface\BpmnTimerSchedulerInterface:
+    alias: Wexample\SymfonyBpmn\Tests\Fixtures\App\Handler\RecordingTimerScheduler
+
+  test.runner:
+    alias: Wexample\SymfonyBpmn\Service\BpmnRunner
+  test.registry:
+    alias: Wexample\SymfonyBpmn\Service\BpmnRegistry
+  test.scenarios:
+    alias: Wexample\SymfonyBpmn\Service\BpmnScenarioService
+  test.matrix:
+    alias: Wexample\SymfonyBpmn\Service\BpmnMatrixService
+  test.token_storage:
+    alias: security.token_storage

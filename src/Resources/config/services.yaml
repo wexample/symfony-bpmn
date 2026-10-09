@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Wexample\SymfonyBpmn\:
+        resource: '../../{Command,EventSubscriber,MessageHandler,Service}'
+        exclude: '../../Command/Abstract*.php'
+
+    Wexample\SymfonyBpmn\Interface\BpmnTimerSchedulerInterface:
+        alias: Wexample\SymfonyBpmn\Service\MessengerTimerScheduler
