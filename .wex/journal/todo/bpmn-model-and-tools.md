@@ -77,6 +77,23 @@ Le propriétaire laisse la main pour le backend (php-bpmn, symfony-bpmn) et revi
 - Runner : démarrer, achever une tâche, appliquer les transitions automatiques (tâches de service via des handlers, envois, jointures), programmer les timers (Messenger avec délai), émettre les messages (symfony-notification s'il est installé), tracer (symfony-activity s'il est installé).
 - Matrice des droits (couloir × tâche), scénarios tirés des chemins, commandes (lister, valider, chemins, matrice, dump Mermaid du workflow).
 
+## État (2026-10-09, agent:main)
+
+Backend fait, testé, documenté (knowledge usage des deux packages) :
+
+- **php-bpmn** (26 tests) : modèle, lecture / écriture XML avec le diagramme, builder, validateur (structure + sous-ensemble exécutable), chemins, ISO 8601 et timers en expression (`${variables['…']}`). Cinq exemples anonymisés dans `examples/` (entrée du locataire, demande d'intervention, réservation de visite, lettre de mission, relecture d'article), écrits depuis `tests/Fixtures/ExampleProcesses.php`.
+- **symfony-bpmn** (17 tests) : registre des `.bpmn`, compilation en Symfony Workflow (réseau de Petri : exclusif, parallèle avec jointure, event-based, frontières timer / message, throw events), gardes (conditions ExpressionLanguage, couloir → rôle ou grant sur le groupe du sujet), runner (start, complete, receive, fireTimer, tâches automatiques via handlers, timers Messenger une fois par événement, choix au déclenchement), événements de transition et de message, matrice des droits, scénarios joués par couloir, commandes `bpmn:list|validate|paths|matrix|dump`. Avec symfony-activity : historique `bpmn` ; avec symfony-notification : messages notifiés via `BpmnRecipientResolverInterface`.
+
+Corrigé en chemin : notification sans client HTTP ne démarrait pas (webhook désormais optionnel).
+
+Non fait, volontairement :
+- pas d'installation dans MOJOE (rien de visible encore) ;
+- sous-processus et call activities compilés comme une seule étape (pas d'exécution de leur flux interne) ;
+- boundary non interrompants, inclusive / complex, erreurs, compensation : dessinés, non exécutés (le validateur le dit) ;
+- les huit workflows de gestion locative ne sont pas tous convertis : trois en exemples (WF-002, 004, 007), les autres suivront le même chemin si utile.
+
+Reste pour la partie visible (avec le propriétaire) : **symfony-bpmn-ds** (affichage du diagramme — mise en page automatique quand le fichier n'a pas de BPMNDI —, parcours d'un chemin, puis édition) et **symfony-bpmn-demo** (les exemples, sur les comptes et équipes de user-demo ; la relecture d'article branchée sur les grants des équipes).
+
 ## Ordre
 
 1. Modéliser les deux cas réels en BPMN, à la main.
