@@ -50,25 +50,32 @@ class BpmnViewService
      */
     public function processes(): array
     {
-        $processes = [];
+        return array_map(
+            fn (string $id) => $this->process($id),
+            array_keys($this->registry->all()),
+        );
+    }
 
-        foreach ($this->registry->all() as $id => $process) {
-            $report = $this->registry->validate($id);
-            $processes[] = new BpmnProcess(
-                processId: $id,
-                name: $process->getName(),
-                documentation: $process->getDocumentation(),
-                executable: $process->isExecutable(),
-                laneCount: count($process->getAllLanes()),
-                nodeCount: count($process->getFlow()->getNodes()),
-                flowCount: count($process->getFlow()->getFlows()),
-                valid: $report->isValid(),
-                errorCount: count($report->getErrors()),
-                warningCount: count($report->getWarnings()),
-            );
-        }
+    /**
+     * One process of the registry, as its sheet heads it.
+     */
+    public function process(string $processId): BpmnProcess
+    {
+        $process = $this->registry->get($processId);
+        $report = $this->registry->validate($processId);
 
-        return $processes;
+        return new BpmnProcess(
+            processId: $processId,
+            name: $process->getName(),
+            documentation: $process->getDocumentation(),
+            executable: $process->isExecutable(),
+            laneCount: count($process->getAllLanes()),
+            nodeCount: count($process->getFlow()->getNodes()),
+            flowCount: count($process->getFlow()->getFlows()),
+            valid: $report->isValid(),
+            errorCount: count($report->getErrors()),
+            warningCount: count($report->getWarnings()),
+        );
     }
 
     /**

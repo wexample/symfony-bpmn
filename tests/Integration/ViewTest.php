@@ -21,6 +21,15 @@ class ViewTest extends AbstractBpmnTestCase
         }
     }
 
+    public function testOneProcessIsReadAsTheListHoldsIt(): void
+    {
+        $process = $this->view()->process('article_review');
+
+        $this->assertSame('Article review', $process->getName());
+        $this->assertSame(3, $process->getLaneCount());
+        $this->assertTrue($process->getValid());
+    }
+
     public function testEveryNodeIsDrawnAndEveryFlowRouted(): void
     {
         $view = $this->view();
