@@ -37,7 +37,10 @@
   "require-dev": {
     "phpunit/phpunit": "^13",
     "wexample/symfony-testing": ">=2.0.0",
-    "symfony/security-bundle": "^7.4 || ^8.0"
+    "symfony/security-bundle": "^7.4 || ^8.0",
+    "wexample/symfony-activity": ">=2.0.0",
+    "wexample/symfony-notification": ">=1.0.1",
+    "symfony/translation": "^7.4 || ^8.0"
   },
   "repositories": [
     {

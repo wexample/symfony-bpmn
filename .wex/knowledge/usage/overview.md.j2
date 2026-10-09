@@ -49,6 +49,13 @@ After each step the runner does what the application does — service, send, scr
 
 What is run is php-bpmn's executable subset; the rest is drawn, and the validator says so.
 
+## With symfony-activity and symfony-notification
+
+Neither is required; each is followed when installed:
+
+- **symfony-activity**: every step is kept in the history of its subject — category `bpmn`, to declare (`wexample_symfony_activity.categories.bpmn`) —, typed `bpmn.start`, `bpmn.task`, `bpmn.event`, `bpmn.boundary`, `bpmn.join`, with the process, the node, its lane, where it led, and who did it — or `by: application`.
+- **symfony-notification**: a message whose node names a `notification` — a category of symfony-notification — is sent to whom the application's `BpmnRecipientResolverInterface` services say (`getRecipients($event)`): the drawing says what is told, the application to whom.
+
 ## Rights, paths, scenarios
 
 - `BpmnMatrixService::build($processId)`: each task, its lane, the role or grant, whether the application does it, what interrupts it.

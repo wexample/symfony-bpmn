@@ -6,7 +6,11 @@ services:
 
     Wexample\SymfonyBpmn\:
         resource: '../../{Command,EventSubscriber,MessageHandler,Service}'
-        exclude: '../../Command/Abstract*.php'
+        exclude:
+            - '../../Command/Abstract*.php'
+            # Registered by the extension, when what they feed is installed.
+            - '../../EventSubscriber/BpmnActivitySubscriber.php'
+            - '../../EventSubscriber/BpmnNotificationSubscriber.php'
 
     Wexample\SymfonyBpmn\Interface\BpmnTimerSchedulerInterface:
         alias: Wexample\SymfonyBpmn\Service\MessengerTimerScheduler
