@@ -237,6 +237,7 @@ class BpmnRunner
 
                         if ($workflow->can($subject, $transition->name)) {
                             $next = $transition;
+
                             break 2;
                         }
                     }

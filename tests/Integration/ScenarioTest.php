@@ -2,9 +2,8 @@
 
 namespace Wexample\SymfonyBpmn\Tests\Integration;
 
-use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Wexample\PhpBpmn\Class\Path\Path;
+use Symfony\Component\Console\Tester\CommandTester;
 use Wexample\SymfonyBpmn\Service\BpmnScenarioService;
 
 /**

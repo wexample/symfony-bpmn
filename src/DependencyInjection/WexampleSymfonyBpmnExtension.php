@@ -8,8 +8,8 @@ use Wexample\SymfonyBpmn\EventSubscriber\BpmnActivitySubscriber;
 use Wexample\SymfonyBpmn\EventSubscriber\BpmnNotificationSubscriber;
 use Wexample\SymfonyBpmn\Interface\BpmnRecipientResolverInterface;
 use Wexample\SymfonyBpmn\Interface\BpmnTaskHandlerInterface;
-use Wexample\SymfonyNotification\WexampleSymfonyNotificationBundle;
 use Wexample\SymfonyHelpers\DependencyInjection\AbstractWexampleSymfonyExtension;
+use Wexample\SymfonyNotification\WexampleSymfonyNotificationBundle;
 
 class WexampleSymfonyBpmnExtension extends AbstractWexampleSymfonyExtension
 {

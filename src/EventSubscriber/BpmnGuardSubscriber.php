@@ -6,8 +6,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\TransitionBlocker;
 use Wexample\SymfonyBpmn\Interface\BpmnSubjectInterface;
-use Wexample\SymfonyBpmn\Service\BpmnConditionEvaluator;
 use Wexample\SymfonyBpmn\Service\BpmnActorContext;
+use Wexample\SymfonyBpmn\Service\BpmnConditionEvaluator;
 use Wexample\SymfonyBpmn\Service\LaneAccessService;
 
 /**
