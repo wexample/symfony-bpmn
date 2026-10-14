@@ -1,6 +1,6 @@
 # symfony-bpmn
 
-Version: 2.0.5
+Version: 2.0.6
 
 ## What it is
 
