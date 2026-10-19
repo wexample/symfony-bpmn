@@ -20,6 +20,7 @@ use Wexample\SymfonyBpmn\Entity\BpmnNode;
 use Wexample\SymfonyBpmn\Entity\BpmnPath;
 use Wexample\SymfonyBpmn\Entity\BpmnProcess;
 use Wexample\SymfonyBpmn\Entity\BpmnTaskRight;
+use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
 
 /**
  * The processes of the registry as entities a screen reads: each list an
@@ -30,6 +31,7 @@ use Wexample\SymfonyBpmn\Entity\BpmnTaskRight;
 class BpmnViewService
 {
     /** @var array<string, Diagram> */
+    #[WorkerSafe('Layouts drawn from the bundled processes, the same for every request.')]
     private array $diagrams = [];
 
     public function __construct(

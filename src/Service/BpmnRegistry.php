@@ -10,6 +10,7 @@ use Wexample\PhpBpmn\Class\Validation\ValidationReport;
 use Wexample\PhpBpmn\Class\Xml\BpmnXmlReader;
 use Wexample\SymfonyBpmn\Class\CompiledProcess;
 use Wexample\SymfonyBpmn\Exception\BpmnRuntimeException;
+use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
 
 /**
  * The processes of the application: every process of every `.bpmn` file in
@@ -18,9 +19,11 @@ use Wexample\SymfonyBpmn\Exception\BpmnRuntimeException;
 class BpmnRegistry
 {
     /** @var array<string, array{Definitions, Process, string}>|null id => definitions, process, file */
+    #[WorkerSafe('The processes the bundled files declare, read once; register() is for tests.')]
     private ?array $processes = null;
 
     /** @var array<string, CompiledProcess> */
+    #[WorkerSafe('Processes compiled from the bundled files, the same for every request.')]
     private array $compiled = [];
 
     /**

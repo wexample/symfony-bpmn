@@ -9,6 +9,7 @@ use Symfony\Component\Workflow\Transition;
 use Symfony\Component\Workflow\Workflow;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Wexample\SymfonyBpmn\Class\CompiledProcess;
+use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
 
 /**
  * The Symfony workflow of a compiled process — a Petri net, marking stored on
@@ -18,6 +19,7 @@ use Wexample\SymfonyBpmn\Class\CompiledProcess;
 class BpmnWorkflowFactory
 {
     /** @var array<string, Workflow> */
+    #[WorkerSafe('Workflows built from the compiled processes, the same for every request.')]
     private array $workflows = [];
 
     public function __construct(
