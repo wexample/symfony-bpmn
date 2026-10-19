@@ -1,6 +1,6 @@
 # symfony-bpmn
 
-Version: 2.0.6
+Version: 3.0.0
 
 ## What it is
 
@@ -103,13 +103,11 @@ This package is part of the Wexample Suite — a collection of high-quality, mod
 
 The suite includes packages for configuration management, file handling, prompts, and more. Each package can be used independently or as part of the integrated suite.
 
-Visit the [Wexample Suite documentation](https://docs.wexample.com) for the complete package ecosystem.
-
 ## Dependencies
 
 - php: >=8.5
 - wexample/php-bpmn: >=2.0.0
-- wexample/symfony-helpers: >=16.0.0
+- wexample/symfony-helpers: >=17.0.0
 - doctrine/orm: ^3.0
 - doctrine/doctrine-bundle: ^2.13 || ^3.0
 - symfony/console: ^7.4 || ^8.0
@@ -120,10 +118,10 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - symfony/security-core: ^7.4 || ^8.0
 - symfony/workflow: ^7.4 || ^8.0
 - wexample/symfony-activity: >=3.0.0
-- wexample/symfony-api: >=13.0.0
-- wexample/symfony-notification: >=2.0.0
+- wexample/symfony-api: >=14.0.0
+- wexample/symfony-notification: >=2.1.0
 - wexample/php-pseudocode: >=2.2.0
-- wexample/symfony-pseudocode: >=3.0.0
+- wexample/symfony-pseudocode: >=4.0.0
 
 ## Versioning & Compatibility Policy
 
@@ -148,6 +146,8 @@ Free to use in both personal and commercial projects.
 This packages suite embodies this spirit. Trusted by professionals and enthusiasts alike, it delivers a consistent, high-quality foundation for modern development — open, elegant, and battle-tested. Its reputation is built on years of collaboration, refinement, and rigorous attention to detail, making it a natural choice for those who demand both robustness and beauty in their tools.
 
 Wexample cultivates a culture of mastery. Each package, each contribution carries the mark of a community that values precision, ethics, and innovation — a community proud to shape the future of digital craftsmanship.
+
+Built and maintained by [Romain Weeger](https://weeger.io).
 
 ## Migration Notes
 
