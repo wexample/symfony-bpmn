@@ -19,6 +19,7 @@ use Wexample\SymfonyBpmn\Class\CompiledProcess;
 use Wexample\SymfonyBpmn\Class\CompiledTransition;
 use Wexample\SymfonyBpmn\Class\Route;
 use Wexample\SymfonyBpmn\Exception\BpmnRuntimeException;
+use Wexample\SymfonyHelpers\Attribute\WorkerSafe;
 
 /**
  * A BPMN process as a Petri net, which Symfony Workflow runs:
@@ -45,6 +46,7 @@ class ProcessCompiler
 {
     private const int MAX_DEPTH = 64;
 
+    #[WorkerSafe('Set at the start of each compile() and read within it only.')]
     private Process $process;
 
     public function compile(Definitions $definitions, Process $process): CompiledProcess
