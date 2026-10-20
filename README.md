@@ -1,6 +1,6 @@
 # symfony-bpmn
 
-Version: 3.0.2
+Version: 3.0.3
 
 ## What it is
 
@@ -107,7 +107,7 @@ The suite includes packages for configuration management, file handling, prompts
 
 - php: >=8.5
 - wexample/php-bpmn: >=2.0.0
-- wexample/symfony-helpers: >=17.0.0
+- wexample/symfony-helpers: >=18.0.0
 - doctrine/orm: ^3.0
 - doctrine/doctrine-bundle: ^2.13 || ^3.0
 - symfony/console: ^7.4 || ^8.0

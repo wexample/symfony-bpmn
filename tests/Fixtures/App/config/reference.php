@@ -1270,114 +1270,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     }>,
  *     role_hierarchy?: array<string, Param|string|list<scalar|Param|null>>,
  * }
- * @psalm-type DhAuditorConfig = array{
- *     enabled?: bool|Param, // Default: true
- *     timezone?: scalar|Param|null, // Default: "UTC"
- *     user_provider?: scalar|Param|null, // Default: "dh_auditor.user_provider"
- *     security_provider?: scalar|Param|null, // Default: "dh_auditor.security_provider"
- *     role_checker?: scalar|Param|null, // Default: "dh_auditor.role_checker"
- *     providers?: array<string, mixed>,
- * }
- * @psalm-type WexampleSymfonySecurityConfig = array{
- *     redaction?: array{
- *         query_parameters?: list<scalar|Param|null>,
- *         patterns?: list<scalar|Param|null>,
- *     },
- *     rate_limits?: list<array{ // Default: []
- *         name?: scalar|Param|null, // The count, shared by every request the rule matches.
- *         limit?: int|Param,
- *         interval?: scalar|Param|null, // As the rate limiter reads it: "1 minute", "15 minutes", "1 hour".
- *         scope?: "ip"|"user"|Param, // Default: "ip"
- *         methods?: list<scalar|Param|null>,
- *         routes?: scalar|Param|null, // A regular expression the route name must match: "/^api_invoice_(emit|peppol_send)$/". // Default: null
- *         paths?: scalar|Param|null, // A regular expression the path must match, for what one route serves under many names: "#^/_forms/submit/form-password_reset_request_form$#". // Default: null
- *     }>,
- *     proof_of_work?: array{ // The captcha a form carries with ProofOfWorkService: work the browser does before sending, checked by the server in one hash.
- *         max_number?: int|Param, // The highest number the browser may have to try: half of it on average, a few hundred milliseconds at the default. // Default: 100000
- *         lifetime?: int|Param, // Seconds a challenge stays valid once issued: the time to fill the form in. // Default: 3600
- *         min_delay?: int|Param, // Seconds before a challenge may be sent back: a form filled in faster was filled in by a program. // Default: 3
- *     },
- *     headers?: array{ // Security headers added to every main response that does not set them already; null leaves one out.
- *         strict_transport_security?: scalar|Param|null, // Sent over HTTPS only. Once a browser has read it, it refuses plain HTTP on the host for max-age seconds. // Default: "max-age=31536000; includeSubDomains"
- *         content_type_options?: scalar|Param|null, // Default: "nosniff"
- *         frame_options?: scalar|Param|null, // Who may show the pages in a frame. DENY when no page of the application is ever framed. // Default: "SAMEORIGIN"
- *         referrer_policy?: scalar|Param|null, // Default: "strict-origin-when-cross-origin"
- *         content_security_policy?: scalar|Param|null, // Off by default: a policy is written against the scripts and styles of the application, not guessed. // Default: null
- *     },
- * }
- * @psalm-type WexampleSymfonyLoaderConfig = array{
- *     tsconfig_path?: scalar|Param|null, // Default: null
- *     default_color_scheme?: scalar|Param|null, // Default: null
- *     develop_toolbar?: bool|Param, // Default: false
- *     themes?: array<string, list<scalar|Param|null>>,
- *     date_locale?: scalar|Param|null, // Default: null
- *     front_paths?: array<string, scalar|Param|null>,
- *     layout_bases?: array<string, array{ // Default: []
- *         page_manager_component?: scalar|Param|null, // Default: null
- *     }>,
- * }
- * @psalm-type WexampleSymfonyTranslationsConfig = array{
- *     translations_paths?: list<scalar|Param|null>,
- *     content_locales?: list<scalar|Param|null>,
- *     storage?: scalar|Param|null, // Default: null
- *     locale_routing?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *         excluded_paths?: list<scalar|Param|null>,
- *     },
- *     locale_cookie?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     strict?: bool|Param|null, // Default: null
- *     syrtis?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *         host?: scalar|Param|null, // Default: "https://api.syrtis.ai"
- *         api_key?: scalar|Param|null,
- *         session_secure_id?: scalar|Param|null,
- *         max_batch_length?: int|Param, // Default: 6000
- *         timeout?: int|Param, // Default: 180
- *         connect_timeout?: int|Param, // Default: 10
- *     },
- * }
- * @psalm-type WexampleSymfonyMailConfig = array{
- *     layout?: scalar|Param|null, // The frame every HTML mail is drawn in. An application gives its own, which may extend this one and override its blocks. // Default: "@WexampleSymfonyMailBundle/mails/layout.html.twig"
- *     text_layout?: scalar|Param|null, // The text part of every HTML mail: the same template, its links written out. // Default: "@WexampleSymfonyMailBundle/mails/layout.txt.twig"
- *     app_name?: scalar|Param|null, // Named in the header and the footer of the layout. // Default: null
- *     mailbox?: array{ // Where MAILER_DSN=mailbox://default keeps the mails, instead of sending them. Refused in prod.
- *         directory?: scalar|Param|null, // Default: "%kernel.project_dir%/var/mailbox"
- *     },
- * }
- * @psalm-type WexampleSymfonyActivityConfig = array{
- *     categories?: array<string, array{ // Default: []
- *         enabled?: bool|Param, // Default: true
- *         retention_days?: int|Param, // Days an entry is kept, then purged by `activity:purge`. Unset, kept for good — the default: what to forget, and when, is a rule of the market the application serves, not of the package. // Default: null
- *         merge_within?: scalar|Param|null, // An interval, `1 hour`: an entry repeating one of the same subject and fingerprint within it is counted on that one rather than written again. Unset, every entry is written. // Default: null
- *         on_expiry?: "delete"|"anonymize"|Param, // delete: the entry is removed; anonymize: it stays, counted, with neither subject, actor nor context. // Default: "delete"
- *     }>,
- *     client_categories?: list<scalar|Param|null>,
- * }
- * @psalm-type WexampleSymfonyNotificationConfig = array{
- *     categories?: array<string, array{ // Default: []
- *         title?: scalar|Param|null, // The translation id of its title, read with its parameters in the recipient's language.
- *         label?: scalar|Param|null, // The translation id naming the category on the preferences page, without parameters. Null, its title. // Default: null
- *         body?: scalar|Param|null, // The translation id of its text, if it has one. // Default: null
- *         level?: "info"|"success"|"warning"|"danger"|Param, // Default: "info"
- *         group?: scalar|Param|null, // Where the preferences page files it, a translation id: categories of a group are shown together. // Default: null
- *         roles?: list<scalar|Param|null>,
- *         channels?: list<scalar|Param|null>,
- *         broadcast?: list<scalar|Param|null>,
- *         route?: scalar|Param|null, // The route of the page of its subject, given the subject id as `id`: where the inbox and the mail link to. // Default: null
- *     }>,
- *     chat?: array{
- *         transport?: scalar|Param|null, // The Notifier chatter transport the `chat` channel posts to — `rocketchat`, `slack`, as `framework.notifier.chatter_transports` names it. Null, the first one. // Default: null
- *     },
- *     webhook?: array{
- *         url?: scalar|Param|null, // Where the `webhook` channel posts, an n8n workflow for instance. Null, the channel sends nothing. // Default: null
- *         method?: "POST"|"GET"|Param, // Default: "POST"
- *         username?: scalar|Param|null, // Default: null
- *         password?: scalar|Param|null, // Default: null
- *         timeout?: float|Param, // Default: 2.0
- *     },
- * }
  * @psalm-type WexampleSymfonyBpmnConfig = array{
  *     paths?: list<scalar|Param|null>,
  *     view_role?: scalar|Param|null, // Role needed to read the processes through the API — their diagram, paths, rights and validation. // Default: "ROLE_USER"
@@ -1394,13 +1286,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     doctrine?: DoctrineConfig,
  *     twig?: TwigConfig,
  *     security?: SecurityConfig,
- *     dh_auditor?: DhAuditorConfig,
- *     wexample_symfony_security?: WexampleSymfonySecurityConfig,
- *     wexample_symfony_loader?: WexampleSymfonyLoaderConfig,
- *     wexample_symfony_translations?: WexampleSymfonyTranslationsConfig,
- *     wexample_symfony_mail?: WexampleSymfonyMailConfig,
- *     wexample_symfony_activity?: WexampleSymfonyActivityConfig,
- *     wexample_symfony_notification?: WexampleSymfonyNotificationConfig,
  *     wexample_symfony_bpmn?: WexampleSymfonyBpmnConfig,
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
