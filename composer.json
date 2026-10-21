@@ -1,7 +1,7 @@
 {
   "name": "wexample/symfony-bpmn",
   "description": "BPMN processes run by Symfony: each compiled into a workflow, its lanes guarding who does what, its automatic tasks, timers and messages handled, its paths and rights listed",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "type": "library",
   "license": "MIT",
   "autoload": {
