@@ -1,7 +1,7 @@
 {
   "name": "wexample/symfony-bpmn",
   "description": "BPMN processes run by Symfony: each compiled into a workflow, its lanes guarding who does what, its automatic tasks, timers and messages handled, its paths and rights listed",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "type": "library",
   "license": "MIT",
   "autoload": {
@@ -34,7 +34,7 @@
     "symfony/security-core": "^7.4 || ^8.0",
     "symfony/workflow": "^7.4 || ^8.0",
     "wexample/symfony-activity": ">=3.0.5",
-    "wexample/symfony-api": ">=14.0.5",
+    "wexample/symfony-api": ">=15.0.0",
     "wexample/symfony-notification": ">=2.1.5",
     "wexample/php-pseudocode": ">=2.2.4",
     "wexample/symfony-pseudocode": ">=4.0.2"
