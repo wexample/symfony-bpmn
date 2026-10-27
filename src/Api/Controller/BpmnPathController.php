@@ -14,7 +14,7 @@ use Wexample\SymfonyHelpers\Controller\AbstractController;
 /**
  * The ways through a process, start to end: its scenarios.
  */
-#[Route(path: 'api/bpmn-path/', name: 'api_bpmn_path_')]
+#[Route(path: '_api/bpmn-path/', name: 'api_bpmn_path_')]
 class BpmnPathController extends AbstractBpmnApiController
 {
     #[Route(path: 'list', name: self::ROUTE_LIST, methods: AbstractController::ROUTE_OPTIONS_METHOD_ONLY_GET, options: AbstractController::ROUTE_OPTIONS_ONLY_EXPOSE)]

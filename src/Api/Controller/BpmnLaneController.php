@@ -14,7 +14,7 @@ use Wexample\SymfonyHelpers\Controller\AbstractController;
 /**
  * The lanes of a process, top first: the bands of its diagram.
  */
-#[Route(path: 'api/bpmn-lane/', name: 'api_bpmn_lane_')]
+#[Route(path: '_api/bpmn-lane/', name: 'api_bpmn_lane_')]
 class BpmnLaneController extends AbstractBpmnApiController
 {
     #[Route(path: 'list', name: self::ROUTE_LIST, methods: AbstractController::ROUTE_OPTIONS_METHOD_ONLY_GET, options: AbstractController::ROUTE_OPTIONS_ONLY_EXPOSE)]

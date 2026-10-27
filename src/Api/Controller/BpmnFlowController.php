@@ -14,7 +14,7 @@ use Wexample\SymfonyHelpers\Controller\AbstractController;
 /**
  * The flows of a process and the points their lines go through.
  */
-#[Route(path: 'api/bpmn-flow/', name: 'api_bpmn_flow_')]
+#[Route(path: '_api/bpmn-flow/', name: 'api_bpmn_flow_')]
 class BpmnFlowController extends AbstractBpmnApiController
 {
     #[Route(path: 'list', name: self::ROUTE_LIST, methods: AbstractController::ROUTE_OPTIONS_METHOD_ONLY_GET, options: AbstractController::ROUTE_OPTIONS_ONLY_EXPOSE)]

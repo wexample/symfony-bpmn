@@ -14,7 +14,7 @@ use Wexample\SymfonyHelpers\Controller\AbstractController;
 /**
  * What the validator says of a process.
  */
-#[Route(path: 'api/bpmn-issue/', name: 'api_bpmn_issue_')]
+#[Route(path: '_api/bpmn-issue/', name: 'api_bpmn_issue_')]
 class BpmnIssueController extends AbstractBpmnApiController
 {
     #[Route(path: 'list', name: self::ROUTE_LIST, methods: AbstractController::ROUTE_OPTIONS_METHOD_ONLY_GET, options: AbstractController::ROUTE_OPTIONS_ONLY_EXPOSE)]

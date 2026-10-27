@@ -18,7 +18,7 @@ use Wexample\SymfonyHelpers\Controller\AbstractController;
  * Who may do each task of a process: the rights matrix, sortable and paged as
  * a table reads it.
  */
-#[Route(path: 'api/bpmn-task-right/', name: 'api_bpmn_task_right_')]
+#[Route(path: '_api/bpmn-task-right/', name: 'api_bpmn_task_right_')]
 class BpmnTaskRightController extends AbstractBpmnApiController
 {
     #[Route(path: 'list', name: self::ROUTE_LIST, methods: AbstractController::ROUTE_OPTIONS_METHOD_ONLY_GET, options: AbstractController::ROUTE_OPTIONS_ONLY_EXPOSE)]

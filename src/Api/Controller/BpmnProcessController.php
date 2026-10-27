@@ -17,7 +17,7 @@ use Wexample\SymfonyHelpers\Controller\AbstractController;
  * The processes of the registry, sortable and paged: what a table of them
  * reads.
  */
-#[Route(path: 'api/bpmn-process/', name: 'api_bpmn_process_')]
+#[Route(path: '_api/bpmn-process/', name: 'api_bpmn_process_')]
 class BpmnProcessController extends AbstractBpmnApiController
 {
     #[Route(path: 'list', name: self::ROUTE_LIST, methods: AbstractController::ROUTE_OPTIONS_METHOD_ONLY_GET, options: AbstractController::ROUTE_OPTIONS_ONLY_EXPOSE)]

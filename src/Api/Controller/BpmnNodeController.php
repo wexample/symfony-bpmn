@@ -14,7 +14,7 @@ use Wexample\SymfonyHelpers\Controller\AbstractController;
 /**
  * The nodes of a process and where they are drawn.
  */
-#[Route(path: 'api/bpmn-node/', name: 'api_bpmn_node_')]
+#[Route(path: '_api/bpmn-node/', name: 'api_bpmn_node_')]
 class BpmnNodeController extends AbstractBpmnApiController
 {
     #[Route(path: 'list', name: self::ROUTE_LIST, methods: AbstractController::ROUTE_OPTIONS_METHOD_ONLY_GET, options: AbstractController::ROUTE_OPTIONS_ONLY_EXPOSE)]
