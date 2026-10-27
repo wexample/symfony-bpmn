@@ -1,6 +1,6 @@
 # symfony-bpmn
 
-Version: 3.0.6
+Version: 4.0.0
 
 BPMN processes run by Symfony: each compiled into a workflow, its lanes guarding who does what, its automatic tasks, timers and messages handled, its paths and rights listed
 
