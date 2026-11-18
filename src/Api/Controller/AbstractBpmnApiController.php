@@ -2,6 +2,7 @@
 
 namespace Wexample\SymfonyBpmn\Api\Controller;
 
+use Wexample\SymfonyApi\Api\Attribute\ApiAccess;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -16,6 +17,7 @@ use Wexample\SymfonyBpmn\Service\BpmnViewService;
  * entity, so that the repository generated from it calls it without being told
  * where it is.
  */
+#[ApiAccess(ApiAccess::CONTROLLER, "wexample_symfony_bpmn.view_role, checked by denyUnlessMayView()")]
 abstract class AbstractBpmnApiController extends AbstractApiController
 {
     final public const string ROUTE_LIST = 'list';
